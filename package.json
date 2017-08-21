@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "",
-    "build": "webpack",
-    "start": "python app.py"
+    "build": "./node_modules/webpack/bin/webpack.js",
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors --inline"
   },
   "author": "Anthony Zhang",
   "license": "az",
@@ -15,11 +15,21 @@
     "babel-loader": "^6.2.1",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
-    "webpack": "^1.15.0"
+    "css-loader": "^0.28.5",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "jsx-loader": "^0.13.2",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.6",
+    "react-hot-loader": "^3.0.0-beta.7",
+    "sass-loader": "^6.0.6",
+    "webpack": "^2.7.0",
+    "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "css-loader": "^0.28.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "style-loader": "^0.18.2",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
   }

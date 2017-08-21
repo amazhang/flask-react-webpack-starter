@@ -1,34 +1,68 @@
+var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
-    "./client/main.jsx"
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    "./client/main.js"
   ],
+
   output: {
-    path: __dirname + '/static',
-    publicPath: "/assets/",
-    filename: "bundle.js"
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: 'static/scripts/',
   },
+
+  devtool: 'inline-source-map',
+
   module: {
-    loaders: [
+    loaders: [{
+        test: /\.scss$/,
+        use : [
+          'style-loader',
+          'css-loader?sourceMap',
+          'sass-loader?sourceMap'
+        ]
+      },
       {
         test: /\.js?$/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react']
-        },
+        use: [
+          'babel-loader',
+        ],
         exclude: /node_modules/
       },
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react']
-        },
+        use: [
+          'babel-loader',
+        ],
         exclude: /node_modules/
       }
     ]
   },
+
   plugins: [
-  ]
+    new webpack.HotModuleReplacementPlugin(),
+    // enable HMR globally
+
+    new webpack.NamedModulesPlugin(),
+    // prints more readable module names in the browser console on HMR updates
+
+    new webpack.NoEmitOnErrorsPlugin(),
+    // do not emit compiled assets that include errors
+  ],
+
+  devServer: {
+    host: 'localhost',
+    port: 8080,
+
+    historyApiFallback: true,
+    // respond to 404s with index.html
+
+    hot: true,
+    // enable HMR on the server
+  },
 };

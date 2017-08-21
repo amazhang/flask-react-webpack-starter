@@ -1,9 +1,11 @@
-<head>
-</head>
+<html !DOCTYPE>
+  <head>
+    <title>Flask test</title>
+  </head>
 
-<body>
-  <div id="reactEntry"></div>
-
-  <!-- Attach React components -->
-  <script type="text/javascript" src="{{ url_for('static', filename='bundle.js') }}"></script>
-</body>
+  <body>
+    <div id="root"></div>
+    <!-- Attach React components -->
+    <script src="http://localhost:8080/static/scripts/main.js"></script>
+  </body>
+</html
