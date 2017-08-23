@@ -1,17 +1,18 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+// var ExtractTextPlugin = require('extract-text-webpack-plugin');
+// var InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 
 module.exports = {
-  entry: [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
-    "./client/main.js"
-  ],
+  entry: {
+    reactHotLoader: 'react-hot-loader/patch',
+    webpackDevServer: 'webpack-dev-server/client?http://localhost:8080',
+    webpackOnlyDevServer: 'webpack/hot/only-dev-server',
+    main: './client/main.js'
+  },
 
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: 'static/scripts/',
   },
@@ -21,11 +22,13 @@ module.exports = {
   module: {
     loaders: [{
         test: /\.scss$/,
-        use : [
-          'style-loader',
-          'css-loader?sourceMap',
-          'sass-loader?sourceMap'
-        ]
+        use : // ExtractTextPlugin.extract(
+          [
+            'style-loader',
+            'css-loader?sourceMap',
+            'sass-loader?sourceMap'
+          ]
+        // )
       },
       {
         test: /\.js?$/,
@@ -45,6 +48,13 @@ module.exports = {
   },
 
   plugins: [
+    // new ExtractTextPlugin({ // define where to save the file
+    //   filename: 'dist/[name].bundle.css',
+    //   allChunks: true,
+    // }),
+    //   new InlineManifestWebpackPlugin({
+  	// 	name: 'webpackManifest'
+  	// }),
     new webpack.HotModuleReplacementPlugin(),
     // enable HMR globally
 
