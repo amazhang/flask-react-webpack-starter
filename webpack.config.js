@@ -1,23 +1,22 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 
 module.exports = {
-  entry: {
-    reactHotLoader: 'react-hot-loader/patch',
-    webpackDevServer: 'webpack-dev-server/client?http://localhost:8080',
-    webpackOnlyDevServer: 'webpack/hot/only-dev-server',
-    main: './client/main.js'
-  },
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    './client/main.js'
+  ],
 
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: 'static/scripts/',
+    filename: 'scripts/main.js',
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/public/scripts/',
   },
 
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
 
   module: {
     loaders: [{
@@ -48,12 +47,9 @@ module.exports = {
 
   plugins: [
     new ExtractTextPlugin({ // define where to save the file
-      filename: 'dist/[name].bundle.css',
+      filename: 'styles/[name].css',
       allChunks: true,
     }),
-      new InlineManifestWebpackPlugin({
-  		name: 'webpackManifest'
-  	}),
 
     new webpack.HotModuleReplacementPlugin(),
     // enable HMR globally
@@ -67,6 +63,7 @@ module.exports = {
 
   devServer: {
     host: 'localhost',
+    contentBase: './',
     port: 8080,
 
     historyApiFallback: true,
