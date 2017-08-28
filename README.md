@@ -1,9 +1,10 @@
 
 # React + Flask starter kit
 
-A quick starter repo that includes Flask and React, with Babel and Webpack. For proof-of-concept projects, workshop settings, etc where you don't want to worry about developer setup or writing config files.
+A quick starter repo that includes Flask, React, Webpack with Babel, sass loader / auto prefixer, and hot reload.
 
-TLDR; for the quick and dirty setup, install your dependencies:
+To set up, follow the below:
+"venv" can be whatever you want your virtual env. name to be called.
 
 ```
 pip install virtualenv
@@ -12,7 +13,10 @@ pip install -r requirements.txt
 npm install -g webpack; npm install
 ```
 
-Then in two separate tabs run `python app.py` and `webpack --watch`. Make edits to `js/Hello.js` and `app.py` to edit the frontend and backend, respectively.
+In one terminal tab, run the app with: `python run.py`
+I've tied webpack commands to `npm run build` (builds files) and `npm start` (watch + hot reload).
+With both run.py and webpack running, localhost:5000 should have our simple app.
+
 
 These steps are explained in more detail below.
 
@@ -51,13 +55,6 @@ npm install
 
 The entry point for the app is in `js/app.js`. The starter React component is `js/Hello.js`. Editing this file is a good place to start.
 
-While developing on the frontend, run `webpack --watch` to keep re-compiling your JavaScript code.
-
-Running `webpack` creates a file in `static/bundle.js`, which is the bundled version of your frontend code.
-
-The "backend" here is a bare-bones Flask app. Look in `app.py` if you want to make edits to the backend.
-
-To run the application, follow the steps in the next section.
 
 ## Running the app
 
@@ -70,6 +67,5 @@ source venv/bin/activate
 Then run the Flask app:
 
 ```
-python app.py
+python run.py
 ```
-
